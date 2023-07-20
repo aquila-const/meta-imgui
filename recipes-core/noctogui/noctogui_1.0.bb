@@ -46,7 +46,7 @@ DEPENDS += "libxtst libxext libxxf86vm libxi libxrandr libxrender libxcursor lib
 
 #fix submodule issue
 do_configure_prepend() {
-  cd ${WORKDIR}
+  cd ${WORKDIR}/git
   git submodule update --init --recursive
 }
 do_install_append() {
