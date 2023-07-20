@@ -4,6 +4,7 @@ DESCRIPTION = "This is a UI for Nocto repo. Built on ImGui."
 SECTION = "base"
 
 LICENSE = "MIT"
+LICENSE_PATH = "${S}"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=7abc1a233092fc104c7af72a89c0829c"
 DEPENDS = "gdk-pixbuf-native"
 
@@ -32,7 +33,8 @@ SYSTEMD_SERVICE_${PN} = "noctogui-systemd.service"
 
 #The normal approach is to use += 
 SRC_URI_append += " file://noctogui-systemd.service \
-                    file://noctogui-init"
+                    file://noctogui-init \
+                    file://LICENSE"
 
 
 FILES_${PN} += "${system_unitdir}/system/noctogui.service"
