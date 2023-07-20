@@ -1,0 +1,38 @@
+#!/bin/sh 
+### BEGIN INIT INFO
+# Provides:             psplash
+# Required-Start:
+# Required-Stop:
+# Default-Start:        S
+# Default-Stop:
+### END INIT INFO
+#this is to actually boot the noctoui app
+if [ ! -e /dev/fb0 ]; then
+    echo "Framebuffer /dev/fb0 not detected"
+    echo "Boot splashscreen disabled"
+    exit 0;
+fi
+
+read CMDLINE < /proc/cmdline
+for x in $CMDLINE; do
+        case $x in
+        noctoui=false)
+		echo "Boot splashscreen disabled" 
+		exit 0;
+                ;;
+        esac
+done
+
+export NOCTOGUI_FIFO_DIR=/mnt/.noctoui
+[ -d $NOCTOGUI_FIFO_DIR ] || mkdir -p $NOCTOGUI_FIFO_DIR
+if ! mountpoint -q $NOCTOGUI_FIFO_DIR; then
+	mount tmpfs -t tmpfs $NOCTOGUI_FIFO_DIR -o,size=40k
+fi
+
+rotation=0
+if [ -e /etc/rotation ]; then
+	read rotation < /etc/rotation
+fi
+
+/usr/bin/noctoui --angle $rotation &
+
