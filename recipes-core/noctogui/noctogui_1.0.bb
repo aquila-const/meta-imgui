@@ -4,8 +4,7 @@ DESCRIPTION = "This is a UI for Nocto repo. Built on ImGui."
 SECTION = "base"
 
 LICENSE = "MIT"
-LICENSE_PATH = "${S}"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=7abc1a233092fc104c7af72a89c0829c"
+LIC_FILES_CHKSUM = "file://${WORKDIR}/LICENSE;md5=9768340f0372ee916245d20c0c3d67de"
 DEPENDS = "gdk-pixbuf-native"
 
 #we need x11 in order to run our GUI
@@ -33,8 +32,7 @@ SYSTEMD_SERVICE_${PN} = "noctogui-systemd.service"
 
 #The normal approach is to use += 
 SRC_URI_append += " file://noctogui-systemd.service \
-                    file://noctogui-init \
-                    file://LICENSE"
+                    file://noctogui-init"
 
 
 FILES_${PN} += "${system_unitdir}/system/noctogui.service"
@@ -48,7 +46,7 @@ DEPENDS += "libxtst libxext libxxf86vm libxi libxrandr libxrender libxcursor lib
 
 #fix submodule issue
 do_configure_prepend() {
-  cd ${WORKDIR}/git
+  cd ${WORKDIR}
   git submodule update --init --recursive
 }
 do_install_append() {
