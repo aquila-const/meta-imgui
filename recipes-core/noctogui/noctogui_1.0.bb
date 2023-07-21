@@ -66,7 +66,3 @@ NATIVE_SYSTEMD_SUPPORT = "1"
 
 SYSTEMD_PACKAGES = "${PN}"
 SYSTEMD_SERVICE_${PN} += "noctogui-systemd.service"
-
-INITSCRIPT_NAME = "noctoui.sh"
-#this is taken from psplash
-INITSCRIPT_PARAMS = "start 0 S . stop 20 0 1 6 ."
